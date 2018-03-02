@@ -128,9 +128,9 @@ def test_when_no_fuel_exists_returns_empty(self):
 
 [Discuss this guideline](/../../issues/6)
 
-## Mocking properties
+## Mocking attributes
 
-When needing to mock a property, use the [pytest-mock](https://pypi.python.org/pypi/pytest-mock) library. Decorators create too much code and become hard to read when needing to mock multiple properties. The `mocker` fixture provided by `pytest-mock` makes things clean and easy to read.
+When needing to mock an attribute, use the [pytest-mock](https://pypi.python.org/pypi/pytest-mock) library. Decorators create too much code and become hard to read when needing to mock multiple attributes. The `mocker` fixture provided by `pytest-mock` makes things clean and easy to read.
 
 ```py
 # bad
@@ -160,6 +160,32 @@ def test_better_returns_a_value(self, mocker):
 
 [Discuss this guideline](/../../issues/7)
 
+
+## Mocking properties
+
+When needing to mock properties it can be tricky at first, but similar to mocking attributes, using `pytest-mock` is the way to go.
+
+```py
+class MyClass:
+    @property
+    def value(self):
+        return 'foo'
+
+# bad
+def test():
+    with mock.patch(MyClass, 'value') as mock_value:
+        mock_value.__get__ = mock.Mock(return_value=3)
+        myclass = MyClass()
+        assert myclass.value == 3
+
+# good
+def test_better_returns_a_value(self, mocker):
+    myclass = MyClass()
+    mocker.patch('MyClass.value', new_callable=PropertyMock, return_value=3)
+    assert myclass.value == 3
+```
+
+[Discuss this guideline](/../../issues/9)
 
 ### Acknowledgments
 
