@@ -185,7 +185,7 @@ def test_better_returns_a_value(self, mocker):
     assert myclass.value == 3
 ```
 
-[Discuss this guideline](/../../issues/8)
+[Discuss this guideline](/../../issues/9)
 
 ### Acknowledgments
 
