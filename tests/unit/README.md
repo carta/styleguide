@@ -22,7 +22,7 @@ Inside of the file `/apps/vehicles/models.py` there is a `Car` class. The tests 
 
 ### Files without Classes
 
-Inside of the file `/app/vehicles/helpers.py` there are only top level method definitions and no classes. The tests for these methods could be found in `/app/vehicles/test_helpers.py`.
+Inside of the file `/app/vehicles/helpers.py` there are only top level function definitions and no classes. The tests for these methods could be found in `/app/vehicles/test_helpers.py`.
 
 ## Classes for methods under test
 
