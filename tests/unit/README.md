@@ -14,11 +14,15 @@ Good test folder structure mimics the root directory. For instance, If the pytho
 
 [Discuss this guideline](/../../issues/1)
 
-## One file per class
+### One file per class
 
 Inside of the file `/apps/vehicles/models.py` there is a `Car` class. The tests for this class are easily found in the file:  `/apps/vehicles/models/test_car.py`
 
 [Discuss this guideline](/../../issues/2)
+
+### Files without Classes
+
+Inside of the file `/app/vehicles/helpers.py` there are only top level method definitions and no classes. The tests for these methods could be found in `/app/vehicles/test_helpers.py`.
 
 ## Classes for methods under test
 
