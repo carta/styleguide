@@ -117,10 +117,19 @@ def test_when_no_fuel_exists_returns_empty_1(self):
 
     assert car.get_remaining_fuel() == 'empty'
 
-# good
+# also bad
 def test_when_no_fuel_exists_returns_empty(self):
     mocked_tank = FuelTank()
     mocked_tank.get_fuel_left = MagicMock(return_value=0)
+    car = Car(fuel_tank=mocked_tank)
+
+    assert car.get_remaining_fuel() == 'empty'
+
+# Good
+def test_when_no_fuel_exists_returns_empty(self, mocker):
+    mocked_tank = FuelTank()
+    mocker.patch.object(mocked_tank, 'get_fuel_left', MagicMock(return_value=0))
+
     car = Car(fuel_tank=mocked_tank)
 
     assert car.get_remaining_fuel() == 'empty'
