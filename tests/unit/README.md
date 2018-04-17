@@ -109,7 +109,7 @@ Decorators become very nasty to read once you have more than one. The [pytest-mo
 
 * test functions must receive the mock objects as parameter, even if you don’t plan to access them directly.
 * The argument order depends on the order of the decorated patch functions.
-* receiving the mocks as parameters doesn’t mix nicely with pytest’s approach of naming fixtures as parameters, or pytest.mark.parametrize;
+* receiving the mocks as parameters doesn’t mix nicely with pytest’s approach of naming fixtures as parameters, or `pytest.mark.parametrize`;
 * you can’t easily undo the mocking during the test execution;
 
 ```py
@@ -163,6 +163,40 @@ def test_better_returns_a_value(self, mocker):
 ```
 
 [Discuss this guideline](/../../issues/7)
+
+
+## Mocking classes' attributes or methods
+
+Don't do it in the class directly, or the mock will remain after the test
+finishes and will affect all the following tests that uses that class.
+With `mocker.patch.object`, the class will be rolled back to its original state at
+the end of the test.
+
+```py
+# really bad (please, be carefull not to do this)
+def test_returns_a_value(self):
+    Car.condition = 'very good'
+    Car.year = 2005
+    Car.miles = 65000
+    Car.base_price = Decimal(25000)
+    
+    car = Car()
+
+    assert car.get_value() == Decimal('7812.5')
+
+# good
+def test_returns_a_value(self, mocker):
+    mocker.patch.object(Car, 'condition', 'very good')
+    mocker.patch.object(Car, 'year', 2005)
+    mocker.patch.object(Car, 'miles', 65000)
+    mocker.patch.object(Car, 'base_price', Decimal(25000))
+    
+    car = Car()
+
+    assert car.get_value() == Decimal('7812.5')
+```
+
+This is an exception where there's no discussion, just follow it and our test suite will be fine.
 
 
 ### Acknowledgments
