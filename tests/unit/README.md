@@ -191,10 +191,10 @@ def test_returns_a_value(self, mocker):
     mocker.patch.object(Car, 'a_class_or_static_method', mocker.MagicMock())
 
     car = Car(
-        condition = 'very good',
-        year = 2005,
-        miles = 65000,
-        base_price = Decimal(25000),
+        condition='very good',
+        year=2005,
+        miles=65000,
+        base_price=Decimal(25000),
     )
     car.break = mocker.MagicMock()  # This is an instance, so it's fine to assign directly
 
