@@ -174,11 +174,13 @@ the end of the test.
 
 ```py
 # really bad (please, be carefull not to do this)
-def test_returns_a_value(self):
+def test_returns_a_value(self, mocker):
     Car.condition = 'very good'
     Car.year = 2005
     Car.miles = 65000
     Car.base_price = Decimal(25000)
+    Car.break = mocker.MagicMock()
+    Car.a_class_or_static_method = mocker.MagicMock()
     
     car = Car()
 
@@ -186,12 +188,15 @@ def test_returns_a_value(self):
 
 # good
 def test_returns_a_value(self, mocker):
-    mocker.patch.object(Car, 'condition', 'very good')
-    mocker.patch.object(Car, 'year', 2005)
-    mocker.patch.object(Car, 'miles', 65000)
-    mocker.patch.object(Car, 'base_price', Decimal(25000))
-    
-    car = Car()
+    mocker.patch.object(Car, 'a_class_or_static_method', mocker.MagicMock())
+
+    car = Car(
+        condition = 'very good',
+        year = 2005,
+        miles = 65000,
+        base_price = Decimal(25000),
+    )
+    car.break = mocker.MagicMock()  # This is an instance, so it's fine to assign directly
 
     assert car.get_value() == Decimal('7812.5')
 ```
