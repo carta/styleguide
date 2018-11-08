@@ -18,3 +18,21 @@ In order to keep DRY, use modules whenever possible
 
 ## Remote State
 If necessary, you may fetch remote state; however, data lookups are preferrable to this whenever possible.
+
+# Contributing
+Feel free to open tickets or send pull requests with improvements. Thanks in
+advance for your help!
+
+## How to Contribute?
+
+It's easy:
+
+* [Fork](https://help.github.com/articles/fork-a-repo) the project on GitHub.
+* Make your feature addition or bug fix in a feature branch. (Include a description of your changes)
+* Push your feature branch to GitHub.
+* Send a [Pull Request](https://help.github.com/articles/using-pull-requests).
+
+# License
+
+![Creative Commons License](https://licensebuttons.net/l/by/4.0/88x31.png)
+This work is licensed under a [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/deed.en_US)
