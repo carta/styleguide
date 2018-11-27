@@ -3,6 +3,19 @@
 For any style question not answered here, please refer to:
 * https://github.com/bsnape/terraform-style-guide
 
+## Folder Structure
+
+The top level of a repostory has two folders. `live` and `modules`.
+
+```
+live             # Contains the configurations for each AWS account
+|_ data_science  # All the configurations of modules used by the data_science AWS account.
+|_ management    # All the configurations of modules used by the management AWS account.
+|_ production    # All the configurations of modules used by the production AWS account.
+modules
+|_ route53       # modules that are used by the "live" folders above.
+```
+
 ## Formatters
 Before pushing any TF code, either run `terraform fmt` on the files you've changed, or configure your editor to automatically do so.
 
