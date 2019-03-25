@@ -56,7 +56,7 @@ def test_car_does_not_start_if_no_gas_in_the_tank(self):
         car.start()
 
 # good
-def test_when_tank_is_empty_does_not_start(self):
+def test_when_tank_is_empty_then_car_does_not_start(self):
     car = Car(fuel=None)
 
     with pytest.raises(RuntimeError):
@@ -101,6 +101,37 @@ class TestGetCarInfo():
 ```
 
 [Discuss this guideline](/../../issues/5)
+
+
+## Arrange, Act, Assert
+
+While writing tests we often need to setup some variables or data structures, then call the method we want to test and after that
+assert that the results match what is expected. The Arrange, Act, Assert pattern enforces clear distinctions between these activities on
+a test file. All tests should be divided in up to three sections, creating a consistent reading experience.
+
+* First, arrange all the setup conditions for the test
+* Empty line
+* Second, act on the behavior being tested
+* Empty line
+* Third, assert expected results
+
+```py
+# bad
+def test_when_tank_is_full_then_returns_the_topped_off_amount(self)
+    fuel_tank = FuelTank(max_volume=50)
+    car = Car(fuel_tank=fuel_tank)
+    topped_off = car.fill_tank(55)
+    assert topped_off == 5
+
+# good
+def test_when_tank_is_full_then_returns_the_topped_off_amount(self)
+    fuel_tank = FuelTank(max_volume=50)
+    car = Car(fuel_tank=fuel_tank)
+
+    topped_off = car.fill_tank(55)
+
+    assert topped_off == 5
+```
 
 
 ## Mocking functions
