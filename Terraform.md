@@ -16,6 +16,9 @@ modules
 |_ route53       # modules that are used by the "live" folders above.
 ```
 
+## Backends
+For Terraform Enterprise (or other specialized backends), ensure that you have a `backend.tf` that points to the location where the `terraform` command (run locally) should pull existing state from.
+
 ## Formatters
 Before pushing any TF code, either run `terraform fmt` on the files you've changed, or configure your editor to automatically do so.
 
